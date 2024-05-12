@@ -51,10 +51,13 @@ class ObserveController extends GetxController with StateMixin {
 
   void takePicture() async {
     await camController.setFlashMode(FlashMode.off);
+
     var tempImage = await camController.takePicture();
-    var tempImagePath = tempImage.path;
+    var bytesImg = await tempImage.readAsBytes();
+
     Get.toNamed(Routes.PREVIEW_IMAGE, arguments: {
-      "imageFile": tempImagePath,
+      "imageFile": bytesImg,
+      "filePath": tempImage.path,
     });
   }
 
@@ -63,10 +66,11 @@ class ObserveController extends GetxController with StateMixin {
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
 
     if (image == null) return;
-    var tempImagePath = image.path;
+    var bytesImg = await image.readAsBytes();
 
     Get.toNamed(Routes.PREVIEW_IMAGE, arguments: {
-      "imageFile": tempImagePath,
+      "imageFile": bytesImg,
+      "filePath": image.path,
     });
   }
 }

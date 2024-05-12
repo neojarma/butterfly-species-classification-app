@@ -29,7 +29,7 @@ abstract class CustomSnackbar {
     Get.snackbar(
       title,
       message,
-      snackPosition: SnackPosition.BOTTOM,
+      snackPosition: SnackPosition.TOP,
       backgroundColor: red,
       duration: const Duration(seconds: 2),
       borderRadius: 10,

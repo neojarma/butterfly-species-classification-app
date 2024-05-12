@@ -11,6 +11,11 @@ final headline6 = GoogleFonts.inter(
   fontWeight: FontWeight.w400,
 );
 
+final headline7 = GoogleFonts.inter(
+  fontSize: 17,
+  fontWeight: FontWeight.w400,
+);
+
 final buttonText = GoogleFonts.montserrat(
   fontSize: 20,
   fontWeight: FontWeight.w600,

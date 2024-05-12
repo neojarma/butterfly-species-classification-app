@@ -2,12 +2,12 @@ import 'package:get/get.dart';
 
 import '../modules/butterfly/bindings/butterfly_binding.dart';
 import '../modules/butterfly/views/butterfly_view.dart';
+import '../modules/classification_result/bindings/classification_result_binding.dart';
+import '../modules/classification_result/views/classification_result_view.dart';
 import '../modules/geographic/bindings/geographic_binding.dart';
 import '../modules/geographic/views/geographic_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
-import '../modules/loading_page/bindings/loading_page_binding.dart';
-import '../modules/loading_page/views/loading_page_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/observe/bindings/observe_binding.dart';
@@ -71,9 +71,9 @@ class AppPages {
       binding: PreviewImageBinding(),
     ),
     GetPage(
-      name: _Paths.LOADING_PAGE,
-      page: () => const LoadingPageView(),
-      binding: LoadingPageBinding(),
+      name: _Paths.CLASSIFICATION_RESULT,
+      page: () => const ClassificationResultView(),
+      binding: ClassificationResultBinding(),
     ),
   ];
 }

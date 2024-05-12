@@ -1,12 +1,9 @@
-import 'dart:io';
-
 import 'package:butterfly_classification/app/core/themes/font_themes.dart';
 import 'package:butterfly_classification/app/core/values/colors.dart';
 import 'package:butterfly_classification/app/global_widgets/custom_button_filled.dart';
 import 'package:butterfly_classification/app/global_widgets/custom_button_outline.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:butterfly_classification/app/global_widgets/loading_spinkit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
 
@@ -33,37 +30,58 @@ class PreviewImageView extends GetView<PreviewImageController> {
               height: MediaQuery.of(context).size.height / 10,
             ),
             ClipRRect(
-              borderRadius: BorderRadius.circular(
-                  10), // Adjust the value to change the roundness
-              child: Image.file(
-                File(controller.tempImagePath),
+              borderRadius: BorderRadius.circular(20),
+              child: Obx(
+                () => Image.memory(
+                  controller.tempImageObs.value,
+                  height: MediaQuery.of(context).size.height / 2,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             const SizedBox(
               height: 20,
             ),
-            Hero(
-              tag: 'loading',
-              child: CustomButtonFillColor(
-                label: 'Use this image',
-                onTap: () {},
-                color: darkBlue,
+            controller.obx(
+              (state) => Column(
+                children: [
+                  CustomButtonFillColor(
+                    label: 'Use this image',
+                    onTap: controller.doClassification,
+                    color: darkBlue,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Or',
+                    style: smallText,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  CustomButtonOutlined(
+                    label: 'Edit',
+                    onTap: () => controller.editImage(context),
+                    color: darkBlue,
+                  )
+                ],
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              'Or',
-              style: smallText,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            CustomButtonOutlined(
-              label: 'Retake',
-              onTap: () => Get.back(),
-              color: darkBlue,
+              onLoading: Column(
+                children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const LoadingSpinkit(),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    'Loading...',
+                    style: mediumText,
+                  )
+                ],
+              ),
             )
           ],
         ),

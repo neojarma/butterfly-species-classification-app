@@ -4,6 +4,9 @@ abstract class ApiProvider {
   static const register = '$_baseUrl/register';
   static const login = '$_baseUrl/login';
 
-  static const profileImage = '$_baseUrl/images/';
+  static const images = '$_baseUrl/images';
   static const predict = '$_baseUrl/predict';
+
+  static const observations = '$_baseUrl/observations';
+  static const species = '$_baseUrl/species';
 }

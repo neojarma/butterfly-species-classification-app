@@ -41,10 +41,16 @@ class HomeView extends GetView<HomeController> {
                   height: 8,
                 ),
                 controller.obx(
-                  (state) => HomeUserHeader(
-                    fullName: controller.fullName,
-                    imagePath: controller.imgProfile,
-                    key: key,
+                  (state) => GestureDetector(
+                    onTap: () async {
+                      await controller.storage.deleteAll();
+                      print('logout');
+                    },
+                    child: HomeUserHeader(
+                      fullName: controller.fullName,
+                      imagePath: controller.imgProfile,
+                      key: key,
+                    ),
                   ),
                   onLoading: const SizedBox.shrink(),
                 ),
@@ -66,9 +72,7 @@ class HomeView extends GetView<HomeController> {
                   marginRight: 5,
                   title: 'Observe',
                   key: key,
-                  callback: () => Get.toNamed(
-                    Routes.OBSERVE,
-                  ),
+                  callback: controller.openCamera,
                 ),
                 CardMenu(
                   icon: Icons.map,

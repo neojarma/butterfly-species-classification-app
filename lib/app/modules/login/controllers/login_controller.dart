@@ -24,6 +24,11 @@ class LoginController extends GetxController with StateMixin {
     passwordController = TextEditingController();
   }
 
+  void continueAsGuest() async {
+    await storage.deleteAll();
+    Get.offAllNamed(Routes.HOME);
+  }
+
   void handleLogin() async {
     if (usernameController.text.isEmpty || passwordController.text.isEmpty) {
       CustomSnackbar.failedSnackbar(

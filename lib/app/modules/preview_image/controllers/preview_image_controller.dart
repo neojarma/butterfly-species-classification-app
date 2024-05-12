@@ -1,74 +1,66 @@
+import 'dart:typed_data';
+
 import 'package:butterfly_classification/app/data/model/predict/predict_response.dart';
 import 'package:butterfly_classification/app/data/provider/api_provider.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:butterfly_classification/app/routes/app_pages.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:image_editor_plus/image_editor_plus.dart';
 
 class PreviewImageController extends GetxController with StateMixin {
-  final tempImagePath = Get.arguments["imageFile"];
+  final String filePath = Get.arguments["filePath"];
+  Uint8List tempImage = Get.arguments["imageFile"];
+  Rx<Uint8List> tempImageObs = Rx<Uint8List>(Uint8List(0));
   final dioHttp = dio.Dio();
 
+  @override
+  void onInit() {
+    tempImageObs.value = tempImage;
+    change(true, status: RxStatus.success());
+    super.onInit();
+  }
+
+  void editImage(BuildContext context) async {
+    final editedImage = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ImageEditor(
+          image: tempImage,
+        ),
+      ),
+    );
+    if (editedImage != null) {
+      tempImageObs.value = editedImage;
+    }
+  }
+
   void doClassification() async {
-    change(true, status: RxStatus.loading());
+    change(false, status: RxStatus.loading());
 
-    String fileNameUp = tempImagePath.path.split('/').last;
-
-    final dio.FormData formData = dio.FormData.fromMap({
-      "image":
-          await dio.MultipartFile.fromFile(tempImagePath, filename: fileNameUp),
-    });
+    final dio.FormData formData = dio.FormData.fromMap(
+      {
+        "image": await dio.MultipartFile.fromFile(
+          filePath,
+          filename: filePath.split('/').last,
+        ),
+      },
+    );
 
     dio.Response<dynamic> response;
 
     try {
       response = await dioHttp.post(ApiProvider.predict, data: formData);
     } catch (e) {
-      response = await dioHttp.post(ApiProvider.predict, data: formData);
+      throw Exception('Failed to send request');
     }
 
     final result = PredictResponse.fromJson(response.data);
-
-    var userPosition = await _determinePosition();
-
     change(true, status: RxStatus.success());
-
-    // Get.toNamed(Routes.CORAL_CLASSIFICATION_RESULT, arguments: arg);
-  }
-
-  Future<Position> _determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    // Test if location services are enabled.
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      // Location services are not enabled don't continue
-      // accessing the position and request users of the
-      // App to enable the location services.
-      return Future.error('Location services are disabled.');
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        // Permissions are denied, next time you could try
-        // requesting permissions again (this is also where
-        // Android's shouldShowRequestPermissionRationale
-        // returned true. According to Android guidelines
-        // your App should show an explanatory UI now.
-        return Future.error('Location permissions are denied');
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      // Permissions are denied forever, handle appropriately.
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
-
-    // When we reach here, permissions are granted and we can
-    // continue accessing the position of the device.
-    return await Geolocator.getCurrentPosition();
+    Get.offAndToNamed(Routes.CLASSIFICATION_RESULT, arguments: {
+      'result': result,
+      'previmg': tempImageObs.value,
+      'filePath': filePath,
+    });
   }
 }

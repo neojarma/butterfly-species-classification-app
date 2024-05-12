@@ -19,8 +19,6 @@ class CustomButtonOutlined extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        // Replace Ink with Container
-        width: double.infinity,
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           border: Border.all(
@@ -33,7 +31,8 @@ class CustomButtonOutlined extends StatelessWidget {
           child: Text(
             label,
             style: buttonText.copyWith(
-              color: Colors.black,
+              color: color,
+              fontSize: 19,
             ),
           ),
         ),

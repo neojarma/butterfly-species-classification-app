@@ -14,6 +14,7 @@ abstract class Routes {
   static const BUTTERFLY = _Paths.BUTTERFLY;
   static const PREVIEW_IMAGE = _Paths.PREVIEW_IMAGE;
   static const LOADING_PAGE = _Paths.LOADING_PAGE;
+  static const CLASSIFICATION_RESULT = _Paths.CLASSIFICATION_RESULT;
 }
 
 abstract class _Paths {
@@ -27,4 +28,5 @@ abstract class _Paths {
   static const BUTTERFLY = '/butterfly';
   static const PREVIEW_IMAGE = '/preview-image';
   static const LOADING_PAGE = '/loading-page';
+  static const CLASSIFICATION_RESULT = '/classification-result';
 }

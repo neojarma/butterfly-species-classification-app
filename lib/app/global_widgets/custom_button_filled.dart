@@ -19,7 +19,6 @@ class CustomButtonFillColor extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Ink(
-        width: double.infinity,
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
           color: color,
@@ -30,6 +29,7 @@ class CustomButtonFillColor extends StatelessWidget {
             label,
             style: buttonText.copyWith(
               color: Colors.white,
+              fontSize: 19,
             ),
           ),
         ),

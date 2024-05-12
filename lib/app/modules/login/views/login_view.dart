@@ -4,6 +4,7 @@ import 'package:butterfly_classification/app/global_widgets/custom_button_filled
 import 'package:butterfly_classification/app/global_widgets/custom_button_outline.dart';
 import 'package:butterfly_classification/app/global_widgets/custom_textfield.dart';
 import 'package:butterfly_classification/app/global_widgets/footer_text.dart';
+import 'package:butterfly_classification/app/global_widgets/loading_spinkit.dart';
 import 'package:butterfly_classification/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
@@ -60,29 +61,43 @@ class LoginView extends GetView<LoginController> {
                   label: 'Login',
                   onTap: controller.handleLogin,
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
-                FooterText(
-                  label: 'Don\'t have an account? ',
-                  labelWithFunction: 'Register',
-                  ontap: () => Get.toNamed(Routes.REGISTER),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  'Or',
-                  style: smallText,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                CustomButtonOutlined(
-                  color: lightBlue,
-                  label: 'Continue as Guest',
-                  onTap: () => Get.offAllNamed(Routes.HOME),
-                ),
+                controller.obx(
+                  (state) => Column(
+                    children: [
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      FooterText(
+                        label: 'Don\'t have an account? ',
+                        labelWithFunction: 'Register',
+                        ontap: () => Get.toNamed(Routes.REGISTER),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'Or',
+                        style: smallText,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      CustomButtonOutlined(
+                        color: lightBlue,
+                        label: 'Continue as Guest',
+                        onTap: controller.continueAsGuest,
+                      ),
+                    ],
+                  ),
+                  onLoading: const Column(
+                    children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      LoadingSpinkit(),
+                    ],
+                  ),
+                )
               ],
             ),
           ),
