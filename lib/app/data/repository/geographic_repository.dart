@@ -12,7 +12,6 @@ abstract class GeographicRepository {
     try {
       final fullPathUrl =
           '${ApiProvider.observations}?species=${request.species}&year=${request.year}&month=${request.month}';
-      print(fullPathUrl);
       final resp = await getConnect.get(fullPathUrl);
       return GeographicResponse.fromJson(resp.body);
     } catch (e) {

@@ -9,4 +9,8 @@ abstract class ApiProvider {
 
   static const observations = '$_baseUrl/observations';
   static const species = '$_baseUrl/species';
+
+  static const pieCharts = '$_baseUrl/pie-charts';
+  static const chartDetailRange = '$_baseUrl/charts-detail-range';
+  static const chartDetail = '$_baseUrl/charts-detail';
 }

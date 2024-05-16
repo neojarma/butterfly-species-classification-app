@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../controllers/statistic_controller.dart';
 
 class StatisticView extends GetView<StatisticController> {
-  const StatisticView({Key? key}) : super(key: key);
+  const StatisticView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

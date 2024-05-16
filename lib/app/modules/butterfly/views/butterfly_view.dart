@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../controllers/butterfly_controller.dart';
 
 class ButterflyView extends GetView<ButterflyController> {
-  const ButterflyView({Key? key}) : super(key: key);
+  const ButterflyView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
