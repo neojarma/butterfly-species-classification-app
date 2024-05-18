@@ -10,7 +10,10 @@ abstract class LineChartRangeRepository {
     LineChartRangeRequest request,
   ) async {
     try {
-      final resp = await getConnect.get(ApiProvider.chartDetailRange);
+      final resp = await getConnect.post(
+        ApiProvider.chartDetailRange,
+        request.toJson(),
+      );
       return LineChartRangeResponse.fromJson(resp.body);
     } catch (e) {
       throw Exception('Failed to send request ${e.toString()}');

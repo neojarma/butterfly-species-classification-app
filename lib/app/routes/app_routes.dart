@@ -15,6 +15,7 @@ abstract class Routes {
   static const PREVIEW_IMAGE = _Paths.PREVIEW_IMAGE;
   static const LOADING_PAGE = _Paths.LOADING_PAGE;
   static const CLASSIFICATION_RESULT = _Paths.CLASSIFICATION_RESULT;
+  static const DETAIL_STATISTIC = _Paths.DETAIL_STATISTIC;
 }
 
 abstract class _Paths {
@@ -29,4 +30,5 @@ abstract class _Paths {
   static const PREVIEW_IMAGE = '/preview-image';
   static const LOADING_PAGE = '/loading-page';
   static const CLASSIFICATION_RESULT = '/classification-result';
+  static const DETAIL_STATISTIC = '/detail-statistic';
 }

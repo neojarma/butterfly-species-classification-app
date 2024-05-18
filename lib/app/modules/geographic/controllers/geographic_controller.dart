@@ -5,7 +5,6 @@ import 'package:butterfly_classification/app/data/model/geographic/geographic_re
 import 'package:butterfly_classification/app/data/model/geographic/geographic_response.dart';
 import 'package:butterfly_classification/app/data/model/species/species_response.dart';
 import 'package:butterfly_classification/app/data/service/geographic_service.dart';
-import 'package:butterfly_classification/app/data/service/pie_chart_response.dart';
 import 'package:butterfly_classification/app/data/service/species_response.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -97,7 +96,7 @@ class GeographicController extends GetxController with StateMixin {
                   ? const Icon(
                       Icons.location_on,
                       color: lightBlue,
-                      size: 70,
+                      size: 45,
                     )
                   : const Icon(
                       Icons.location_on,
