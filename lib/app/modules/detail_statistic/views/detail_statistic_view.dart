@@ -135,7 +135,7 @@ class DetailStatisticView extends GetView<DetailStatisticController> {
                           ),
                           CustomButtonFillColor(
                             label: 'Apply',
-                            onTap: controller.updateDataChart,
+                            onTap: controller.updateDataChartRange,
                             color: darkBlue,
                           ),
                         ],
@@ -171,10 +171,12 @@ class DetailStatisticView extends GetView<DetailStatisticController> {
               const SizedBox(
                 height: 50,
               ),
-              Center(
-                child: Text(
-                  'Data for 2024',
-                  style: buttonText,
+              Obx(
+                () => Center(
+                  child: Text(
+                    'Data for ${controller.selectedYear.value}',
+                    style: buttonText,
+                  ),
                 ),
               ),
               const SizedBox(
@@ -191,7 +193,7 @@ class DetailStatisticView extends GetView<DetailStatisticController> {
                               minY: controller.min - 10 < 0
                                   ? 0
                                   : controller.min - 10,
-                              maxY: 30,
+                              maxY: controller.max,
                               titlesData: FlTitlesData(
                                 topTitles: const AxisTitles(
                                   sideTitles: SideTitles(
@@ -207,14 +209,26 @@ class DetailStatisticView extends GetView<DetailStatisticController> {
                                   sideTitles: SideTitles(
                                     showTitles: true,
                                     getTitlesWidget: (value, meta) {
-                                      if (controller.backup.contains(value)) {
-                                        final DateFormat monthFormat =
-                                            DateFormat.MMM();
-                                        int monthIndex = value.toInt();
-                                        DateTime date = DateTime(0, monthIndex);
-                                        String monthName =
-                                            monthFormat.format(date);
-                                        return Text(monthName);
+                                      if (controller.toggleFilter.value) {
+                                        if (controller.backup.contains(value)) {
+                                          final DateFormat yearFormat =
+                                              DateFormat.y();
+                                          DateTime date =
+                                              DateTime(value.toInt());
+                                          String year = yearFormat.format(date);
+                                          return Text(year);
+                                        }
+                                      } else {
+                                        if (controller.backup.contains(value)) {
+                                          final DateFormat monthFormat =
+                                              DateFormat.MMM();
+                                          int monthIndex = value.toInt();
+                                          DateTime date =
+                                              DateTime(0, monthIndex);
+                                          String monthName =
+                                              monthFormat.format(date);
+                                          return Text(monthName);
+                                        }
                                       }
 
                                       return const Text('');
@@ -230,7 +244,7 @@ class DetailStatisticView extends GetView<DetailStatisticController> {
                                       .toList(),
                                   isCurved: false,
                                   dotData: const FlDotData(
-                                    show: false,
+                                    show: true,
                                   ),
                                 ),
                               ],
@@ -238,7 +252,15 @@ class DetailStatisticView extends GetView<DetailStatisticController> {
                           ),
                         ),
                       )
-                    : const Text('no data'),
+                    : Center(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 35),
+                          child: Text(
+                            'No Data',
+                            style: headline6,
+                          ),
+                        ),
+                      ),
                 onLoading: const LoadingSpinkit(),
               ),
             ],

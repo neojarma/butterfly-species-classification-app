@@ -42,10 +42,7 @@ class HomeView extends GetView<HomeController> {
                 ),
                 controller.obx(
                   (state) => GestureDetector(
-                    onTap: () async {
-                      await controller.storage.deleteAll();
-                      print('logout');
-                    },
+                    onTap: controller.logout,
                     child: HomeUserHeader(
                       fullName: controller.fullName,
                       imagePath: controller.imgProfile,

@@ -48,4 +48,9 @@ class HomeController extends GetxController with StateMixin {
     String img = await storage.read(key: 'img') ?? 'default_profil.jpg';
     imgProfile = '${ApiProvider.images}/user/$img';
   }
+
+  void logout() async {
+    await storage.deleteAll();
+    Get.offAllNamed(Routes.LOGIN);
+  }
 }

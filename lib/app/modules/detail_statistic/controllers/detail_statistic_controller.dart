@@ -16,6 +16,7 @@ class DetailStatisticController extends GetxController with StateMixin {
   double min = 0;
   double max = 0;
   Set<double> backup = {};
+  var selectedYear = ''.obs;
 
   @override
   void onInit() async {
@@ -26,6 +27,7 @@ class DetailStatisticController extends GetxController with StateMixin {
 
   void fetchDataYear(int year) async {
     change(false, status: RxStatus.loading());
+    selectedYear.value = year.toString();
     points.clear();
     backup.clear();
 
@@ -47,6 +49,8 @@ class DetailStatisticController extends GetxController with StateMixin {
         backup.add(each.month.toDouble());
       }
 
+      min = lineChartResponse.lineChart.length == 1 ? 0 : min;
+
       points.sort((a, b) => a[0].compareTo(b[0]));
 
       double temp = max;
@@ -63,6 +67,7 @@ class DetailStatisticController extends GetxController with StateMixin {
 
   void fetchDataYearRange(int from, int to) async {
     change(false, status: RxStatus.loading());
+    selectedYear.value = '$from - $to';
     points.clear();
     backup.clear();
 
@@ -87,6 +92,8 @@ class DetailStatisticController extends GetxController with StateMixin {
         backup.add(each.year.toDouble());
       }
 
+      min = lineChartResponse.lineChartRange.length == 1 ? 0 : min;
+
       points.sort((a, b) => a[0].compareTo(b[0]));
 
       double temp = max;
@@ -101,5 +108,16 @@ class DetailStatisticController extends GetxController with StateMixin {
     change(false, status: RxStatus.success());
   }
 
-  void updateDataChart() async {}
+  void updateDataChart() async {
+    final year = int.parse(yearController.text);
+
+    fetchDataYear(year);
+  }
+
+  void updateDataChartRange() async {
+    final from = int.parse(yearFromController.text);
+    final to = int.parse(yearToController.text);
+
+    fetchDataYearRange(from, to);
+  }
 }

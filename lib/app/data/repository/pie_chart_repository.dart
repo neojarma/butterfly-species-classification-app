@@ -8,7 +8,6 @@ abstract class PieChartRepository {
   static Future<PieChartResponse> pieChart() async {
     try {
       final resp = await getConnect.get(ApiProvider.pieCharts);
-      print(resp.body);
       return PieChartResponse.fromJson(resp.body);
     } catch (e) {
       throw Exception('Failed to send request ${e.toString()}');
