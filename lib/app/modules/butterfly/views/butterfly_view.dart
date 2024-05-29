@@ -1,5 +1,4 @@
 import 'package:butterfly_classification/app/core/themes/font_themes.dart';
-import 'package:butterfly_classification/app/core/values/colors.dart';
 import 'package:butterfly_classification/app/routes/app_pages.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
