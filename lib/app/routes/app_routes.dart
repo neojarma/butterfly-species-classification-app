@@ -16,6 +16,7 @@ abstract class Routes {
   static const LOADING_PAGE = _Paths.LOADING_PAGE;
   static const CLASSIFICATION_RESULT = _Paths.CLASSIFICATION_RESULT;
   static const DETAIL_STATISTIC = _Paths.DETAIL_STATISTIC;
+  static const DETAIL_BUTTERFLY = _Paths.DETAIL_BUTTERFLY;
 }
 
 abstract class _Paths {
@@ -31,4 +32,5 @@ abstract class _Paths {
   static const LOADING_PAGE = '/loading-page';
   static const CLASSIFICATION_RESULT = '/classification-result';
   static const DETAIL_STATISTIC = '/detail-statistic';
+  static const DETAIL_BUTTERFLY = '/detail-butterfly';
 }

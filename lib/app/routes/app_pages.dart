@@ -4,6 +4,8 @@ import '../modules/butterfly/bindings/butterfly_binding.dart';
 import '../modules/butterfly/views/butterfly_view.dart';
 import '../modules/classification_result/bindings/classification_result_binding.dart';
 import '../modules/classification_result/views/classification_result_view.dart';
+import '../modules/detail_butterfly/bindings/detail_butterfly_binding.dart';
+import '../modules/detail_butterfly/views/detail_butterfly_view.dart';
 import '../modules/detail_statistic/bindings/detail_statistic_binding.dart';
 import '../modules/detail_statistic/views/detail_statistic_view.dart';
 import '../modules/geographic/bindings/geographic_binding.dart';
@@ -81,6 +83,11 @@ class AppPages {
       name: _Paths.DETAIL_STATISTIC,
       page: () => const DetailStatisticView(),
       binding: DetailStatisticBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_BUTTERFLY,
+      page: () => const DetailButterflyView(),
+      binding: DetailButterflyBinding(),
     ),
   ];
 }

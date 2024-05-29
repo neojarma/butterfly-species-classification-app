@@ -31,6 +31,7 @@ Future<void> main() async {
       title: "Application",
       initialRoute: route,
       getPages: AppPages.routes,
+      debugShowCheckedModeBanner: false,
     ),
   );
 }
