@@ -1,6 +1,5 @@
 import 'package:butterfly_classification/app/core/themes/font_themes.dart';
 import 'package:butterfly_classification/app/core/values/colors.dart';
-import 'package:butterfly_classification/app/global_widgets/loading_spinkit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -18,18 +17,11 @@ class HomeUserHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(
-          margin: const EdgeInsets.only(right: 10),
-          width: 70,
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-          ),
-          child: ClipOval(
-            child: CachedNetworkImage(
-              imageUrl: imagePath,
-              placeholder: (context, url) => const LoadingSpinkit(),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
-            ),
+        Padding(
+          padding: const EdgeInsets.only(right: 20),
+          child: CircleAvatar(
+            radius: 45,
+            backgroundImage: CachedNetworkImageProvider(imagePath),
           ),
         ),
         Column(

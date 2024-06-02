@@ -7,6 +7,7 @@ import 'package:butterfly_classification/app/modules/home/widgets/small_circle_d
 import 'package:butterfly_classification/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -15,96 +16,100 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          const BigCircleDecoration(),
-          const SmallCircleDecoration(
-            heightDivider: 17,
-            left: -50,
-          ),
-          const SmallCircleDecoration(
-            heightDivider: 9,
-            right: -50,
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 90, left: 20),
-            child: Column(
-              children: [
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    'Hello !',
-                    style: headline4.copyWith(color: baseWhite),
-                  ),
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                controller.obx(
-                  (state) => GestureDetector(
-                    onTap: controller.logout,
-                    child: HomeUserHeader(
-                      fullName: controller.fullName,
-                      imagePath: controller.imgProfile,
-                      key: key,
+      body: SmartRefresher(
+        controller: controller.refreshController,
+        onRefresh: controller.loadData,
+        child: Stack(
+          children: [
+            const BigCircleDecoration(),
+            const SmallCircleDecoration(
+              heightDivider: 17,
+              left: -50,
+            ),
+            const SmallCircleDecoration(
+              heightDivider: 9,
+              right: -50,
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 90, left: 20),
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'Hello !',
+                      style: headline4.copyWith(color: baseWhite),
                     ),
                   ),
-                  onLoading: const SizedBox.shrink(),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height / 3,
-            ),
-            child: GridView.count(
-              crossAxisCount: 2,
-              mainAxisSpacing: 16,
-              crossAxisSpacing: 5,
-              children: [
-                CardMenu(
-                  icon: Icons.camera,
-                  marginLeft: 20,
-                  marginRight: 5,
-                  title: 'Observe',
-                  key: key,
-                  callback: controller.openCamera,
-                ),
-                CardMenu(
-                  icon: Icons.map,
-                  marginLeft: 5,
-                  marginRight: 20,
-                  title: 'Geographic',
-                  key: key,
-                  callback: () => Get.toNamed(
-                    Routes.GEOGRAPHIC,
+                  const SizedBox(
+                    height: 8,
                   ),
-                ),
-                CardMenu(
-                  icon: Icons.stacked_bar_chart,
-                  marginLeft: 20,
-                  marginRight: 5,
-                  title: 'Statistic',
-                  key: key,
-                  callback: () => Get.toNamed(
-                    Routes.STATISTIC,
+                  controller.obx(
+                    (state) => GestureDetector(
+                      onTap: controller.userProfile,
+                      child: HomeUserHeader(
+                        fullName: controller.fullName,
+                        imagePath: controller.imgProfile,
+                        key: key,
+                      ),
+                    ),
+                    onLoading: const SizedBox.shrink(),
                   ),
-                ),
-                CardMenu(
-                  icon: Icons.book,
-                  marginLeft: 5,
-                  marginRight: 20,
-                  title: 'Butterflies',
-                  key: key,
-                  callback: () => Get.toNamed(
-                    Routes.BUTTERFLY,
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+            Container(
+              margin: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height / 3,
+              ),
+              child: GridView.count(
+                crossAxisCount: 2,
+                mainAxisSpacing: 16,
+                crossAxisSpacing: 5,
+                children: [
+                  CardMenu(
+                    icon: Icons.camera,
+                    marginLeft: 20,
+                    marginRight: 5,
+                    title: 'Observe',
+                    key: key,
+                    callback: controller.openCamera,
+                  ),
+                  CardMenu(
+                    icon: Icons.map,
+                    marginLeft: 5,
+                    marginRight: 20,
+                    title: 'Geographic',
+                    key: key,
+                    callback: () => Get.toNamed(
+                      Routes.GEOGRAPHIC,
+                    ),
+                  ),
+                  CardMenu(
+                    icon: Icons.stacked_bar_chart,
+                    marginLeft: 20,
+                    marginRight: 5,
+                    title: 'Statistic',
+                    key: key,
+                    callback: () => Get.toNamed(
+                      Routes.STATISTIC,
+                    ),
+                  ),
+                  CardMenu(
+                    icon: Icons.book,
+                    marginLeft: 5,
+                    marginRight: 20,
+                    title: 'Butterflies',
+                    key: key,
+                    callback: () => Get.toNamed(
+                      Routes.BUTTERFLY,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

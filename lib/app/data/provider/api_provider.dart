@@ -15,4 +15,6 @@ abstract class ApiProvider {
   static const chartDetail = '$_baseUrl/charts-detail';
 
   static const butterflies = '$_baseUrl/butterflies';
+
+  static const profiles = '$_baseUrl/profiles';
 }

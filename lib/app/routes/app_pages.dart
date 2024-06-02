@@ -8,6 +8,8 @@ import '../modules/detail_butterfly/bindings/detail_butterfly_binding.dart';
 import '../modules/detail_butterfly/views/detail_butterfly_view.dart';
 import '../modules/detail_statistic/bindings/detail_statistic_binding.dart';
 import '../modules/detail_statistic/views/detail_statistic_view.dart';
+import '../modules/edit_profile/bindings/edit_profile_binding.dart';
+import '../modules/edit_profile/views/edit_profile_view.dart';
 import '../modules/geographic/bindings/geographic_binding.dart';
 import '../modules/geographic/views/geographic_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -22,6 +24,8 @@ import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
 import '../modules/statistic/bindings/statistic_binding.dart';
 import '../modules/statistic/views/statistic_view.dart';
+import '../modules/user_profile/bindings/user_profile_binding.dart';
+import '../modules/user_profile/views/user_profile_view.dart';
 
 // ignore_for_file: constant_identifier_names
 
@@ -88,6 +92,16 @@ class AppPages {
       name: _Paths.DETAIL_BUTTERFLY,
       page: () => const DetailButterflyView(),
       binding: DetailButterflyBinding(),
+    ),
+    GetPage(
+      name: _Paths.USER_PROFILE,
+      page: () => const UserProfileView(),
+      binding: UserProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDIT_PROFILE,
+      page: () => const EditProfileView(),
+      binding: EditProfileBinding(),
     ),
   ];
 }

@@ -17,6 +17,8 @@ abstract class Routes {
   static const CLASSIFICATION_RESULT = _Paths.CLASSIFICATION_RESULT;
   static const DETAIL_STATISTIC = _Paths.DETAIL_STATISTIC;
   static const DETAIL_BUTTERFLY = _Paths.DETAIL_BUTTERFLY;
+  static const USER_PROFILE = _Paths.USER_PROFILE;
+  static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
 }
 
 abstract class _Paths {
@@ -33,4 +35,6 @@ abstract class _Paths {
   static const CLASSIFICATION_RESULT = '/classification-result';
   static const DETAIL_STATISTIC = '/detail-statistic';
   static const DETAIL_BUTTERFLY = '/detail-butterfly';
+  static const USER_PROFILE = '/user-profile';
+  static const EDIT_PROFILE = '/edit-profile';
 }
