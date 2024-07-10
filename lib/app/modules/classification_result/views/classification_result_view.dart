@@ -88,22 +88,40 @@ class ClassificationResultView extends GetView<ClassificationResultController> {
               const SizedBox(
                 height: 5,
               ),
-              GestureDetector(
-                onTap: () => controller.previewImageOffline(context),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.width - 70,
-                    child: FittedBox(
-                      fit: BoxFit.cover,
-                      child: Image.memory(
-                        controller.prevImage,
+              controller.isEnhanced
+                  ? GestureDetector(
+                      onTap: () => controller.previewImageOnline(
+                          context, controller.enhanceURL),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.width - 70,
+                          child: FittedBox(
+                            fit: BoxFit.cover,
+                            child: Image.network(
+                              controller.enhanceURL,
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  : GestureDetector(
+                      onTap: () => controller.previewImageOffline(context),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.width - 70,
+                          child: FittedBox(
+                            fit: BoxFit.cover,
+                            child: Image.memory(
+                              controller.prevImage,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-              ),
               const SizedBox(
                 height: 5,
               ),

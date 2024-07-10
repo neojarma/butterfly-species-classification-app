@@ -17,6 +17,9 @@ import 'package:intl/intl.dart';
 class ClassificationResultController extends GetxController with StateMixin {
   final result = Get.arguments["result"] as PredictResponse;
   final prevImage = Get.arguments["previmg"] as Uint8List;
+  final isEnhanced = Get.arguments['isEnhanced'] as bool;
+  final enhancedFilePath = Get.arguments['enhancedFilePath'] as String;
+  final enhanceURL = Get.arguments['enhancedURL'] as String;
   final filePath = Get.arguments['filePath'] as String;
 
   FlutterSecureStorage storage = const FlutterSecureStorage();
@@ -27,13 +30,17 @@ class ClassificationResultController extends GetxController with StateMixin {
   void uploadObservation(Position position, PredictResponse resp) async {
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('yyyy-MM-dd').format(now);
-
     final dio.FormData formData = dio.FormData.fromMap(
       {
-        "image": await dio.MultipartFile.fromFile(
-          filePath,
-          filename: filePath.split('/').last,
-        ),
+        "image": isEnhanced
+            ? await dio.MultipartFile.fromFile(
+                enhancedFilePath,
+                filename: filePath.split('/').last,
+              )
+            : dio.MultipartFile.fromBytes(
+                prevImage,
+                filename: filePath.split('/').last,
+              ),
         "species": resp.predictedSpecies,
         "total": int.tryParse(counterController.text),
         "date": formattedDate,
@@ -51,6 +58,7 @@ class ClassificationResultController extends GetxController with StateMixin {
       change(false, status: RxStatus.loading());
       await dioHttp.post(ApiProvider.observations,
           data: formData, options: options);
+
       Get.back();
     } catch (e) {
       throw Exception('Failed to send request $e');

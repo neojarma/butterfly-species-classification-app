@@ -1,6 +1,6 @@
 import 'package:butterfly_classification/app/core/themes/font_themes.dart';
 import 'package:butterfly_classification/app/modules/detail_butterfly/controllers/detail_butterfly_controller.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 class GeographyTable extends StatelessWidget {
   const GeographyTable({
