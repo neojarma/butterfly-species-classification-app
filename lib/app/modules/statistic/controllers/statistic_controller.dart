@@ -23,6 +23,9 @@ class StatisticController extends GetxController with StateMixin {
     const Color.fromRGBO(102, 194, 165, 1), // rgba(102, 194, 165, 1)
     const Color.fromRGBO(50, 136, 189, 1), // rgba(50, 136, 189, 1)
     const Color.fromRGBO(94, 79, 162, 1), // rgba(94, 79, 162, 1)
+    const Color.fromARGB(255, 31, 55, 190), // rgba(94, 79, 162, 1)
+    const Color.fromARGB(255, 83, 106, 231), // rgba(94, 79, 162, 1)
+    const Color.fromARGB(255, 10, 201, 128), // rgba(94, 79, 162, 1)
   ];
   List<Widget> indicator = [];
 
